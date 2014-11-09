@@ -13,11 +13,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+/**
+ * WebDriver 
+ * @author fengfan
+ * Create Date:2014-11-09
+ *
+ */
 public class Webdriver {
 	public WebDriver driver;
 	/** Browser Start **/
 	public void browserCRStart(){
-		String chromeDriverPath=System.getProperty("usr.dir")+"/chrome.exe";
+		String chromeDriverPath=System.getProperty("user.dir")+"/chromedriver.exe";
 	    System.setProperty("webdriver.chrome.driver",chromeDriverPath);
 	    ChromeOptions options = new ChromeOptions();
 	    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -25,7 +31,7 @@ public class Webdriver {
 	    driver = new ChromeDriver();
 	}
 	public void browserIEStart(){
-		String ieDriverPath=System.getProperty("usr.dir")+"/ie.exe";
+		String ieDriverPath=System.getProperty("user.dir")+"/ie.exe";
 	    System.setProperty("webdriver.ie.driver",ieDriverPath);
 	    ChromeOptions options = new ChromeOptions();
 	    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -63,42 +69,47 @@ public class Webdriver {
 		}
 	}
 	/** webElment   **/
-	public WebElement getWebElementById(String uiOjbect){
-		return driver.findElement(By.id(uiOjbect));
+	public WebElement getWebElementById(String uiObject){
+		return driver.findElement(By.id(uiObject));
 	}
-	public WebElement getWebElementByCss(String uiOjbect){
-		return driver.findElement(By.cssSelector(uiOjbect));
+	public WebElement getWebElementByCss(String uiObject){
+		return driver.findElement(By.cssSelector(uiObject));
 	}
-	public List<WebElement> getWebElementsById(String uiOjbect){
-		return driver.findElements(By.id(uiOjbect));
+	public List<WebElement> getWebElementsById(String uiObject){
+		return driver.findElements(By.id(uiObject));
 	}
-	public List<WebElement> getWebElementsByCss(String uiOjbect){
-		return driver.findElements(By.cssSelector(uiOjbect));
+	public List<WebElement> getWebElementsByCss(String uiObject){
+		return driver.findElements(By.cssSelector(uiObject));
 	}
 	
 	/** webElment action **/
-	public void ClickWebElementById(String uiOjbect){
-		WebElement webElment=getWebElementById(uiOjbect);
+	public void ClickWebElementById(String uiObject){
+		WebElement webElment=getWebElementById(uiObject);
 		webElment.click();
 	}
-	public void SendKeysWebElementById(String uiOjbect,String testData){
-		WebElement webElment=getWebElementById(uiOjbect);
+	public void SendKeysWebElementById(String uiObject,String testData){
+		WebElement webElment=getWebElementById(uiObject);
 		webElment.clear();
 		webElment.sendKeys(testData);
 	}
-	public void ClickWebElementByCss(String uiOjbect){
-		WebElement webElment=getWebElementByCss(uiOjbect);
+	public void ClickWebElementByCss(String uiObject){
+		WebElement webElment=getWebElementByCss(uiObject);
 		webElment.click();
 	}
-	public void SendKeysWebElementByCss(String uiOjbect,String testData){
-		WebElement webElment=getWebElementByCss(uiOjbect);
+	public void SendKeysWebElementByCss(String uiObject,String testData){
+		WebElement webElment=getWebElementByCss(uiObject);
 		webElment.clear();
 		webElment.sendKeys(testData);
+	}
+	/** webElment List Click **/
+	public void SendKeysWebElementListByCss(String uiObject,int index){
+        List<WebElement> item=getWebElementsByCss(uiObject);
+        item.get(index).click();
 	}
 	
 	
 	public boolean assertEqual(String expect,String actual){
-		if(actual.equals(actual)){
+		if(actual.equals(expect)){
 			return true;
 		}
 		return false;
